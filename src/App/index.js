@@ -13,7 +13,7 @@ const dataAllSrc = localStorage.getItem(ALL_KEY);
 const dataListSrc = localStorage.getItem(LIST_KEY);
 const isLoggedSrc = localStorage.getItem(LOGGED_KEY);
 if (!dataListSrc) {
-  localStorage.setItem('LIST_KEY', JSON.stringify([]));
+  localStorage.setItem(LIST_KEY, JSON.stringify([]));
 }
 
 class App extends Component {
@@ -41,6 +41,7 @@ class App extends Component {
     this.setState({
       isLogged: true,
     });
+    localStorage.setItem(LOGGED_KEY, JSON.parse(true));
   };
   render() {
     return this.state.isReady ? (
