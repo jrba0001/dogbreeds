@@ -37,11 +37,17 @@ class App extends Component {
       });
     }
   }
-  doLogin = () => {
+  changeLoginState = (value) => {
     this.setState({
-      isLogged: true,
+      isLogged: value,
     });
-    localStorage.setItem(LOGGED_KEY, JSON.parse(true));
+    localStorage.setItem(LOGGED_KEY, JSON.parse(value));
+  };
+  doLogin = () => {
+    this.changeLoginState(true);
+  };
+  doLogout = () => {
+    this.changeLoginState(false);
   };
   render() {
     return this.state.isReady ? (
@@ -50,6 +56,7 @@ class App extends Component {
         dataList={this.state.dataList}
         isLogged={this.state.isLogged}
         doLogin={this.doLogin}
+        doLogout={this.doLogout}
       />
     ) : (
       <div>Cargando...</div>

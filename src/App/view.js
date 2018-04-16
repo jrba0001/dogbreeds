@@ -19,14 +19,14 @@ injectGlobal`
   }
 `;
 
-const App = ({ isLogged, doLogin }) => (
+const App = ({ isLogged, doLogin, doLogout }) => (
   <BrowserRouter>
     <ThemeProvider theme={theme}>
       <div>
         <Header>
           <Menu isAdmin={isLogged} />
         </Header>
-        <Content doLogin={doLogin} isLogged={isLogged} />
+        <Content doLogin={doLogin} doLogout={doLogout} isLogged={isLogged} />
       </div>
     </ThemeProvider>
   </BrowserRouter>
