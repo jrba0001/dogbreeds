@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { darken, timingFunctions } from 'polished';
 
-const StyledWrapper = styled.div``;
-
 const StyledResult = styled.button`
   background: ${props => props.theme.colors.secondary};
   color: ${props => props.theme.colors.white};
@@ -18,12 +16,12 @@ const StyledResult = styled.button`
 `;
 
 const Results = () => (
-  <StyledWrapper>
+  <div>
     <StyledResult>Bulldog</StyledResult>
     <StyledResult>Bulldog</StyledResult>
     <StyledResult>Bulldog</StyledResult>
     <StyledResult>Bulldog</StyledResult>
-  </StyledWrapper>
+  </div>
 );
 
 export default Results;

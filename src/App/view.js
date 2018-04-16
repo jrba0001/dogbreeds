@@ -19,17 +19,25 @@ injectGlobal`
   }
 `;
 
-const App = () => (
+const App = ({ isLogged, doLogin }) => (
   <BrowserRouter>
     <ThemeProvider theme={theme}>
       <div>
         <Header>
-          <Menu isAdmin />
+          <Menu isAdmin={isLogged} />
         </Header>
-        <Content />
+        <Content doLogin={doLogin} isLogged={isLogged} />
       </div>
     </ThemeProvider>
   </BrowserRouter>
 );
+
+App.defaultProps = {
+  ...Content.defaultProps,
+};
+
+App.propTypes = {
+  ...Content.propTypes,
+};
 
 export default App;

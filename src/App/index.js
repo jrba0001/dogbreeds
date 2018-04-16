@@ -7,7 +7,9 @@ const ALL_KEY = 'dataAll';
 const LIST_KEY = 'dataKey';
 const LOGGED_KEY = 'isLogged';
 
+// Listado con todos los nombres de razas
 const dataAllSrc = localStorage.getItem(ALL_KEY);
+// Listado con las razas seleccionadas (nombre + imagen)
 const dataListSrc = localStorage.getItem(LIST_KEY);
 const isLoggedSrc = localStorage.getItem(LOGGED_KEY);
 if (!dataListSrc) {
@@ -17,6 +19,7 @@ if (!dataListSrc) {
 class App extends Component {
   state = {
     isLogged: isLoggedSrc && JSON.parse(isLoggedSrc),
+    // ¿Existen ya datos en localStorage?
     isReady: !!dataAllSrc && !!dataListSrc,
     dataAll: !!dataAllSrc && JSON.parse(dataAllSrc),
     dataList: !!dataListSrc && JSON.parse(dataListSrc),
@@ -34,12 +37,18 @@ class App extends Component {
       });
     }
   }
+  doLogin = () => {
+    this.setState({
+      isLogged: true,
+    });
+  };
   render() {
     return this.state.isReady ? (
       <View
         dataAll={this.state.dataAll}
         dataList={this.state.dataList}
         isLogged={this.state.isLogged}
+        doLogin={this.doLogin}
       />
     ) : (
       <div>Cargando...</div>

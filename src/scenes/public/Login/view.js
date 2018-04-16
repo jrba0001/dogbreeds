@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Button } from '../../../components';
@@ -32,11 +33,18 @@ const StyledInput = styled.input`
   padding: ${props => props.theme.space.xs};
 `;
 
+const StyledError = styled.div`
+  background: ${props => props.theme.colors.danger};
+  color: ${props => props.theme.colors.white};
+  padding: ${props => props.theme.space.sm};
+`;
+
 const Login = ({
-  email, password, handleFieldChange, hasError,
+  email, password, handleFieldChange, hasError, handleSubmit,
 }) => (
   <StyledWrapper>
-    <StyledForm>
+    {hasError && <StyledError>EL FORMULARIO TIENE ERRORES</StyledError>}
+    <StyledForm onSubmit={handleSubmit}>
       <StyledGroup>
         <StyledLabel>Email</StyledLabel>
         <StyledInput onChange={handleFieldChange('email')} value={email} />
@@ -51,5 +59,19 @@ const Login = ({
     </StyledForm>
   </StyledWrapper>
 );
+
+Login.defaultProps = {
+  email: '',
+  password: '',
+  hasError: false,
+};
+
+Login.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  handleFieldChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  hasError: PropTypes.bool,
+};
 
 export default Login;
