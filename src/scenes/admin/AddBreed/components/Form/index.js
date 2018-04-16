@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -17,10 +18,15 @@ const StyledInput = styled.input`
   padding: ${props => `${props.theme.space.sm} ${props.theme.space.md}`};
 `;
 
-const Form = () => (
+const Form = ({ searchValue, updateSearchValue }) => (
   <StyledForm>
-    <StyledInput placeholder="Buscar..." />
+    <StyledInput placeholder="Buscar..." value={searchValue} onChange={updateSearchValue} />
   </StyledForm>
 );
+
+Form.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+  updateSearchValue: PropTypes.func.isRequired,
+};
 
 export default Form;

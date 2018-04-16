@@ -15,13 +15,8 @@ const StyledResult = styled.button`
   }
 `;
 
-const Results = () => (
-  <div>
-    <StyledResult>Bulldog</StyledResult>
-    <StyledResult>Bulldog</StyledResult>
-    <StyledResult>Bulldog</StyledResult>
-    <StyledResult>Bulldog</StyledResult>
-  </div>
+const Results = ({ results }) => (
+  <div>{results.map(value => <StyledResult key={value}>{value}</StyledResult>)}</div>
 );
 
 export default Results;
