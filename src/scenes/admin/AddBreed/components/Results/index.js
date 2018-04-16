@@ -15,7 +15,11 @@ const StyledResult = styled.button`
   }
 `;
 
-const Results = ({ results }) => (
+const StyledHighlight = styled.span`
+  background: ${props => (props.selected ? 'yellow' : 'transparent')};
+`;
+
+const Results = ({ results, searchValue }) => (
   <div>{results.map(value => <StyledResult key={value}>{value}</StyledResult>)}</div>
 );
 

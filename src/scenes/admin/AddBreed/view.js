@@ -6,7 +6,7 @@ import { Form, Results } from './components';
 const AddBreed = ({ searchValue, updateSearchValue, results }) => (
   <Fragment>
     <Form searchValue={searchValue} updateSearchValue={updateSearchValue} />
-    <Results results={results} />
+    <Results searchValue={searchValue} results={results} />
   </Fragment>
 );
 
