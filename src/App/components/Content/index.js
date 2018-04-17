@@ -20,12 +20,12 @@ const Content = ({
       path="/admin/addbreed"
       component={() => <AddBreed dataAll={dataAll} dataList={dataList} addToList={addToList} />}
     />
-    <Route path="/admin/breedlist" component={BreedListAdmin} />
+    <Route path="/admin/breedlist" component={() => <BreedListAdmin data={dataList} />} />
     <Route
       path="/admin/logout"
       component={() => <Logout doLogout={doLogout} isLogged={isLogged} />}
     />
-    <Route exact path="/" component={BreedList} />
+    <Route exact path="/" component={() => <BreedList data={dataList} />} />
     <Route exact path="/login" component={() => <Login doLogin={doLogin} isLogged={isLogged} />} />
   </StyledWrapper>
 );

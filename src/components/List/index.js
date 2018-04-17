@@ -52,26 +52,20 @@ const StyledDelete = styled(Button)`
   }
 `;
 
-let listKey = 0;
-const List = ({ isAdmin }) => (
+const List = ({ isAdmin, data }) => (
   <StyledWrapper>
-    {Array.from({ length: 10 }).map(() => {
-      listKey += 1;
-      return (
-        <StyledItem key={listKey}>
+    {data &&
+      data.map(breedObj => (
+        <StyledItem key={breedObj.name}>
           <StyledRow>
             <StyledPicture>
-              <StyledImg
-                src="https://s3-eu-west-1.amazonaws.com/dog-ceo-stanford-files/bulldog-boston/n02096585_1069.jpg"
-                alt=""
-              />
+              <StyledImg src={breedObj.image} alt="" />
             </StyledPicture>
-            <StyledName>bulldog</StyledName>
+            <StyledName>{breedObj.name}</StyledName>
           </StyledRow>
           {isAdmin && <StyledDelete>Borrar</StyledDelete>}
         </StyledItem>
-      );
-    })}
+      ))}
   </StyledWrapper>
 );
 
