@@ -66,6 +66,18 @@ class App extends Component {
       });
     }
   };
+  handleDelete = (e) => {
+    const breedName = e.target.value;
+    if (e.target) {
+      this.setState((prevState) => {
+        const newData = prevState.dataList.filter(breedObj => breedObj.name !== breedName);
+        localStorage.setItem(LIST_KEY, JSON.stringify(newData));
+        return {
+          dataList: newData,
+        };
+      });
+    }
+  };
   doLogin = () => {
     this.changeLoginState(true);
   };
@@ -81,6 +93,7 @@ class App extends Component {
         doLogin={this.doLogin}
         doLogout={this.doLogout}
         addToList={this.addToList}
+        handleDelete={this.handleDelete}
       />
     ) : (
       <div>Cargando...</div>
