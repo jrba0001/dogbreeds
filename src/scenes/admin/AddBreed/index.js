@@ -21,11 +21,17 @@ class AddBreed extends Component {
   state = initialState;
   updateSearchValue = (e) => {
     const keywords = e.target.value;
+    // Si hemos escrito algo en el input del formulario
     if (keywords.length) {
+      // Resultados que coinciden dentro de "dataAll" (listado de nombres)
       const matches = Object.keys(this.props.dataAll).filter(v => v.includes(keywords));
+      // Si se ha encontrado algún resultado que coincida con el keyword
       if (matches.length) {
+        // Eliminamos los resultados que ya están añadidos en "dataList" (lista pública)
         const withoutCurrent = matches.filter((breedName) => {
+          // Resultados de "dataList" que coinciden con el keyword
           const duplicated = this.props.dataList.filter(breedObj => breedObj.name === breedName);
+          // Si no tiene coincidencias pasa, si tiene coincidencias se extrae
           return duplicated.length === 0;
         });
         this.setState({

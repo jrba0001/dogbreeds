@@ -45,7 +45,8 @@ class App extends Component {
   };
   addToList = (e) => {
     const breedName = e.target.value;
-    // const existentResults = this.state.dataList.filter(({ name }) => name === breedName);
+    // Busca si existe algún resultado en el estado "dataList" que coincida
+    // Si existe no lo añade
     const existentResults = this.state.dataList.filter(v => v.name === breedName);
     if (existentResults.length === 0) {
       axios.get(`https://dog.ceo/api/breed/${breedName}/images/random`).then((response) => {
@@ -64,9 +65,6 @@ class App extends Component {
         }
       });
     }
-    // this.setState(prevState => ({
-    //   dataList: prevState.dataList.concat(breedObj),
-    // }));
   };
   doLogin = () => {
     this.changeLoginState(true);
