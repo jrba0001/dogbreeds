@@ -20,7 +20,7 @@ injectGlobal`
 `;
 
 const App = ({
-  isLogged, doLogin, doLogout, dataAll, dataList, addToList,
+  isLogged, doLogin, doLogout, dataAll, dataList, addToList, handleDelete,
 }) => (
   <BrowserRouter>
     <ThemeProvider theme={theme}>
@@ -35,6 +35,7 @@ const App = ({
           isLogged={isLogged}
           dataAll={dataAll}
           addToList={addToList}
+          handleDelete={handleDelete}
         />
       </div>
     </ThemeProvider>

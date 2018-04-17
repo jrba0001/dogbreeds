@@ -7,7 +7,7 @@ import { Button } from '../';
 const StyledWrapper = styled.div`
   display: grid;
   grid-auto-flow: row;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-gap: ${props => props.theme.space.md};
 `;
 
@@ -52,7 +52,13 @@ const StyledDelete = styled(Button)`
   }
 `;
 
-const List = ({ isAdmin, data }) => (
+const StyledWarning = styled.div`
+  background: ${props => props.theme.colors.danger};
+  color: ${props => props.theme.colors.white};
+  padding: ${props => props.theme.space.sm};
+`;
+
+const List = ({ isAdmin, data, handleDelete }) => (
   <StyledWrapper>
     {data &&
       data.map(breedObj => (
@@ -63,9 +69,14 @@ const List = ({ isAdmin, data }) => (
             </StyledPicture>
             <StyledName>{breedObj.name}</StyledName>
           </StyledRow>
-          {isAdmin && <StyledDelete>Borrar</StyledDelete>}
+          {isAdmin && (
+            <StyledDelete value={breedObj.name} onClick={handleDelete}>
+              Borrar
+            </StyledDelete>
+          )}
         </StyledItem>
       ))}
+    {(!data || !data.length) && <StyledWarning>No se han encontrado resultados</StyledWarning>}
   </StyledWrapper>
 );
 
