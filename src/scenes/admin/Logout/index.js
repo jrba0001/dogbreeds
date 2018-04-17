@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { userLogout } from '../../../actions';
 
 class Logout extends Component {
   static defaultProps = {
@@ -8,11 +11,11 @@ class Logout extends Component {
   };
   static propTypes = {
     isLogged: PropTypes.bool,
-    doLogout: PropTypes.func.isRequired,
+    userLogout: PropTypes.func.isRequired,
   };
   componentDidMount() {
     if (this.props.isLogged) {
-      this.props.doLogout();
+      this.props.userLogout();
     }
   }
   render() {
@@ -23,4 +26,12 @@ class Logout extends Component {
   }
 }
 
-export default Logout;
+const mapStateToProps = state => ({
+  isLogged: state.user.isLogged,
+});
+
+const mapDispatchToProps = {
+  userLogout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);

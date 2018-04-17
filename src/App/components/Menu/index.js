@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const StyledWrapper = styled.nav`
   display: flex;
@@ -45,4 +46,8 @@ Menu.propTypes = {
   isAdmin: PropTypes.bool,
 };
 
-export default Menu;
+const mapStateToProps = state => ({
+  isAdmin: state.user.isLogged,
+});
+
+export default connect(mapStateToProps)(Menu);
