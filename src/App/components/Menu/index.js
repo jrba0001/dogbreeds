@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -8,11 +8,14 @@ const StyledWrapper = styled.nav`
   justify-content: flex-start;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: #fff;
   font-size: ${props => props.theme.fontSizes.md};
   margin-right: 30px;
+  &.active {
+    border-bottom: 6px solid ${props => props.theme.colors.white};
+  }
   &:last-child {
     margin-right: 0;
   }
@@ -20,7 +23,9 @@ const StyledLink = styled(Link)`
 
 const Menu = ({ isAdmin }) => (
   <StyledWrapper>
-    <StyledLink to="/">Listado de mascotas</StyledLink>
+    <StyledLink exact to="/">
+      Listado de mascotas
+    </StyledLink>
     {!isAdmin && <StyledLink to="/login">Login</StyledLink>}
     {isAdmin && (
       <Fragment>
