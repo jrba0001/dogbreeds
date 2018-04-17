@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import View from './view';
+import { userLogin } from '../../../actions';
 
 const initialState = {
   hasError: false,
@@ -16,7 +18,7 @@ class Login extends Component {
   };
   static propTypes = {
     isLogged: PropTypes.bool,
-    doLogin: PropTypes.func.isRequired,
+    userLogin: PropTypes.func.isRequired,
   };
   state = initialState;
   handleFieldChange = key => (e) => {
@@ -28,7 +30,7 @@ class Login extends Component {
     e.preventDefault();
     if (this.state.email === 'info@keepcoding.io' && this.state.password === '123456') {
       this.setState(initialState);
-      this.props.doLogin();
+      this.props.userLogin();
     } else {
       this.setState({
         hasError: true,
@@ -50,4 +52,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  isLogged: state.user.isLogged,
+});
+
+const mapDispatchToProps = {
+  userLogin,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

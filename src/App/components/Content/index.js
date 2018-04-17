@@ -29,7 +29,7 @@ const Content = ({
       component={() => <Logout doLogout={doLogout} isLogged={isLogged} />}
     />
     <Route exact path="/" component={() => <BreedList data={dataList} />} />
-    <Route exact path="/login" component={() => <Login doLogin={doLogin} isLogged={isLogged} />} />
+    <Route exact path="/login" component={Login} />
   </StyledWrapper>
 );
 
