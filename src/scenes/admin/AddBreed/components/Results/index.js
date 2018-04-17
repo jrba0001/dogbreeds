@@ -19,8 +19,14 @@ const StyledHighlight = styled.span`
   background: ${props => (props.selected ? 'yellow' : 'transparent')};
 `;
 
-const Results = ({ results, searchValue }) => (
-  <div>{results.map(value => <StyledResult key={value}>{value}</StyledResult>)}</div>
+const Results = ({ results, searchValue, addToList }) => (
+  <div>
+    {results.map(value => (
+      <StyledResult onClick={addToList} key={value} value={value}>
+        {value}
+      </StyledResult>
+    ))}
+  </div>
 );
 
 export default Results;

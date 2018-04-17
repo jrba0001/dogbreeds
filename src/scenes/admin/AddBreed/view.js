@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 import { Form, Results } from './components';
 
-const AddBreed = ({ searchValue, updateSearchValue, results }) => (
+const AddBreed = ({
+  searchValue, updateSearchValue, results, addToList,
+}) => (
   <Fragment>
     <Form searchValue={searchValue} updateSearchValue={updateSearchValue} />
-    <Results searchValue={searchValue} results={results} />
+    <Results searchValue={searchValue} results={results} addToList={addToList} />
   </Fragment>
 );
 

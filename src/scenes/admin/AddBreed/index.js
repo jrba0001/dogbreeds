@@ -11,17 +11,28 @@ const initialState = {
 class AddBreed extends Component {
   static defaultProps = {
     dataAll: {},
+    dataList: [],
   };
   static propTypes = {
     dataAll: PropTypes.objectOf(PropTypes.any),
+    dataList: PropTypes.arrayOf(PropTypes.any),
+    addToList: PropTypes.func.isRequired,
   };
   state = initialState;
   updateSearchValue = (e) => {
-    if (e.target.value.length) {
-      this.setState({
-        searchValue: e.target.value,
-        results: Object.keys(this.props.dataAll).filter(v => v.includes(e.target.value)),
-      });
+    const keywords = e.target.value;
+    if (keywords.length) {
+      const matches = Object.keys(this.props.dataAll).filter(v => v.includes(keywords));
+      if (matches.length) {
+        const withoutCurrent = matches.filter((breedName) => {
+          const duplicated = this.props.dataList.filter(breedObj => breedObj.name === breedName);
+          return duplicated.length === 0;
+        });
+        this.setState({
+          searchValue: keywords,
+          results: withoutCurrent,
+        });
+      }
     } else {
       this.setState(initialState);
     }
@@ -32,6 +43,7 @@ class AddBreed extends Component {
         searchValue={this.state.searchValue}
         updateSearchValue={this.updateSearchValue}
         results={this.state.results}
+        addToList={this.props.addToList}
       />
     );
   }

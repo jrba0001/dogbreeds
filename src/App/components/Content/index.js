@@ -12,11 +12,14 @@ const StyledWrapper = styled.div`
 const AdminRedirect = () => <Redirect to="/admin/addbreed" />;
 
 const Content = ({
-  isLogged, doLogin, doLogout, dataAll,
+  isLogged, doLogin, doLogout, dataAll, dataList, addToList,
 }) => (
   <StyledWrapper>
     <Route exact path="/admin" component={AdminRedirect} />
-    <Route path="/admin/addbreed" component={() => <AddBreed dataAll={dataAll} />} />
+    <Route
+      path="/admin/addbreed"
+      component={() => <AddBreed dataAll={dataAll} dataList={dataList} addToList={addToList} />}
+    />
     <Route path="/admin/breedlist" component={BreedListAdmin} />
     <Route
       path="/admin/logout"
