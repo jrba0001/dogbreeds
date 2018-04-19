@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 const StyledWrapper = styled.nav`
   display: flex;
@@ -22,13 +21,13 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-const Menu = ({ isAdmin }) => (
+const Menu = ({ isLogged }) => (
   <StyledWrapper>
     <StyledLink exact to="/">
       Listado de mascotas
     </StyledLink>
-    {!isAdmin && <StyledLink to="/login">Login</StyledLink>}
-    {isAdmin && (
+    {!isLogged && <StyledLink to="/login">Login</StyledLink>}
+    {isLogged && (
       <Fragment>
         <StyledLink to="/admin/addbreed">Añadir raza</StyledLink>
         <StyledLink to="/admin/breedlist">Eliminar raza</StyledLink>
@@ -39,15 +38,11 @@ const Menu = ({ isAdmin }) => (
 );
 
 Menu.defaultProps = {
-  isAdmin: false,
+  isLogged: false,
 };
 
 Menu.propTypes = {
-  isAdmin: PropTypes.bool,
+  isLogged: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
-  isAdmin: state.user.isLogged,
-});
-
-export default connect(mapStateToProps)(Menu);
+export default Menu;

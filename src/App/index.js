@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import View from './view';
 
@@ -15,6 +17,12 @@ if (!dataListSrc) {
 }
 
 class App extends Component {
+  static defaultProps = {
+    isLogged: false,
+  };
+  static propTypes = {
+    isLogged: PropTypes.bool,
+  };
   state = {
     // ¿Existen ya datos en localStorage?
     isReady: !!dataAllSrc && !!dataListSrc,
@@ -76,6 +84,7 @@ class App extends Component {
         dataList={this.state.dataList}
         addToList={this.addToList}
         handleDelete={this.handleDelete}
+        isLogged={this.props.isLogged}
       />
     ) : (
       <div>Cargando...</div>
@@ -83,4 +92,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isLogged: state.user.isLogged,
+});
+
+export default connect(mapStateToProps)(App);
