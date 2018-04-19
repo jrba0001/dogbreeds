@@ -11,9 +11,7 @@ const StyledWrapper = styled.div`
 const AdminRedirect = () => <Redirect to="/admin/addbreed" />;
 const NoLoggedRedirect = () => <Redirect to="/" />;
 
-const Content = ({
-  dataList, addToList, handleDelete, isLogged,
-}) => (
+const Content = ({ dataList, addToList, isLogged }) => (
   <StyledWrapper>
     {isLogged ? (
       <Fragment>
@@ -22,16 +20,13 @@ const Content = ({
           path="/admin/addbreed"
           component={() => <AddBreed dataList={dataList} addToList={addToList} />}
         />
-        <Route
-          path="/admin/breedlist"
-          component={() => <BreedListAdmin data={dataList} handleDelete={handleDelete} />}
-        />
+        <Route path="/admin/breedlist" component={BreedListAdmin} />
         <Route path="/admin/logout" component={Logout} />
       </Fragment>
     ) : (
       <Route path="/admin" component={NoLoggedRedirect} />
     )}
-    <Route exact path="/" component={() => <BreedList data={dataList} />} />
+    <Route exact path="/" component={BreedList} />
     <Route exact path="/login" component={Login} />
   </StyledWrapper>
 );

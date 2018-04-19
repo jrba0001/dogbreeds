@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AddBreedView from './view';
 import { Preloader } from '../../../components';
-import { adminCatalogLoadData } from '../../../actions';
+import { adminCatalogLoadData, publicListSaveData } from '../../../actions';
 
 const initialState = {
   searchValue: '',
@@ -21,10 +21,10 @@ class AddBreed extends Component {
   static propTypes = {
     dataAll: PropTypes.objectOf(PropTypes.any),
     dataList: PropTypes.arrayOf(PropTypes.any),
-    addToList: PropTypes.func.isRequired,
     fetched: PropTypes.bool,
     error: PropTypes.instanceOf(Error),
     adminCatalogLoadData: PropTypes.func.isRequired,
+    publicListSaveData: PropTypes.func.isRequired,
   };
   state = initialState;
   componentDidMount() {
@@ -32,6 +32,15 @@ class AddBreed extends Component {
       this.props.adminCatalogLoadData();
     }
   }
+  addToList = (e) => {
+    const breedName = e.target.value;
+    // Busca si existe algún resultado en el estado "dataList" que coincida
+    // Si existe no lo añade
+    const existentResults = this.props.dataList.filter(v => v.name === breedName);
+    if (existentResults.length === 0) {
+      this.props.publicListSaveData(breedName);
+    }
+  };
   updateSearchValue = (e) => {
     const keywords = e.target.value;
     // Si hemos escrito algo en el input del formulario
@@ -68,7 +77,7 @@ class AddBreed extends Component {
         searchValue={this.state.searchValue}
         updateSearchValue={this.updateSearchValue}
         results={this.state.results}
-        addToList={this.props.addToList}
+        addToList={this.addToList}
       />
     );
   }
@@ -82,6 +91,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   adminCatalogLoadData,
+  publicListSaveData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBreed);
