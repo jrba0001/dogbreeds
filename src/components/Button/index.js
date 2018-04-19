@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import styledMap from 'styled-map';
 
 const Button = styled.button`
+  border-radius: ${props => (props.rounded ? '20px' : 0)};
   background: ${props =>
     styledMap({
       primary: props.theme.colors.primary,
