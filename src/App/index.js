@@ -1,36 +1,52 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider, injectGlobal } from 'styled-components';
+import { normalize } from 'polished';
 import { connect } from 'react-redux';
 
-import View from './view';
-import { publicListDelete } from '../actions';
+import { Header, Content, Menu } from './components';
 
-class App extends Component {
-  static defaultProps = {
-    isLogged: false,
-  };
-  static propTypes = {
-    isLogged: PropTypes.bool,
-    publicListDelete: PropTypes.func.isRequired,
-  };
-  render() {
-    return (
-      <View
-        dataList={this.props.dataList}
-        addToList={this.addToList}
-        isLogged={this.props.isLogged}
-      />
-    );
+import theme from '../theme';
+
+injectGlobal`
+  ${normalize()}
+`;
+
+injectGlobal`
+  html {
+    box-sizing: border-box;
   }
-}
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+`;
+
+const App = ({ isLogged }) => (
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <div>
+        <Header>
+          <Menu isLogged={isLogged} />
+        </Header>
+        <Content isLogged={isLogged} />
+      </div>
+    </ThemeProvider>
+  </BrowserRouter>
+);
+
+App.defaultProps = {
+  ...Content.defaultProps,
+  isLogged: false,
+};
+
+App.propTypes = {
+  ...Content.propTypes,
+  isLogged: PropTypes.bool,
+};
 
 const mapStateToProps = state => ({
   isLogged: state.user.isLogged,
-  dataList: state.publicList.data,
 });
 
-const mapDispatchToProps = {
-  publicListDelete,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
