@@ -21,19 +21,11 @@ export const adminCatalogFetchError = data => ({
 });
 
 export const adminCatalogLoadData = () => (dispatch) => {
-  const ALL_KEY = 'dataAll';
-  const dataAllSrc = localStorage.getItem(ALL_KEY);
   dispatch(adminCatalogFetchStart());
-  if (dataAllSrc) {
-    return dispatch(adminCatalogFetchSuccess(JSON.parse(dataAllSrc)));
-  }
-  if (!dataAllSrc) {
-    return axios.get('https://dog.ceo/api/breeds/list/all').then((response) => {
-      if (response.data && response.data.message) {
-        localStorage.setItem(ALL_KEY, JSON.stringify(response.data.message));
-        return dispatch(adminCatalogFetchSuccess(response.data.message));
-      }
-      return dispatch(adminCatalogFetchError(new Error('Hubo un problema conectando con la API')));
-    });
-  }
+  return axios.get('https://dog.ceo/api/breeds/list/all').then((response) => {
+    if (response.data && response.data.message) {
+      return dispatch(adminCatalogFetchSuccess(response.data.message));
+    }
+    return dispatch(adminCatalogFetchError(new Error('Hubo un problema conectando con la API')));
+  });
 };

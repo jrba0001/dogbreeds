@@ -28,7 +28,9 @@ class AddBreed extends Component {
   };
   state = initialState;
   componentDidMount() {
-    this.props.adminCatalogLoadData();
+    if (!this.props.dataAll) {
+      this.props.adminCatalogLoadData();
+    }
   }
   updateSearchValue = (e) => {
     const keywords = e.target.value;
