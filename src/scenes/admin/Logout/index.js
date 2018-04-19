@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userLogout } from '../../../actions';
+import { Preloader } from '../../../components';
 
 class Logout extends Component {
   static defaultProps = {
@@ -22,7 +23,7 @@ class Logout extends Component {
     if (!this.props.isLogged) {
       return <Redirect to="/" />;
     }
-    return <div>Cargando...</div>;
+    return <Preloader />;
   }
 }
 

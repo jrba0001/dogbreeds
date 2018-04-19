@@ -12,7 +12,7 @@ const AdminRedirect = () => <Redirect to="/admin/addbreed" />;
 const NoLoggedRedirect = () => <Redirect to="/" />;
 
 const Content = ({
-  dataAll, dataList, addToList, handleDelete, isLogged,
+  dataList, addToList, handleDelete, isLogged,
 }) => (
   <StyledWrapper>
     {isLogged ? (
@@ -20,7 +20,7 @@ const Content = ({
         <Route exact path="/admin" component={AdminRedirect} />
         <Route
           path="/admin/addbreed"
-          component={() => <AddBreed dataAll={dataAll} dataList={dataList} addToList={addToList} />}
+          component={() => <AddBreed dataList={dataList} addToList={addToList} />}
         />
         <Route
           path="/admin/breedlist"

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import AddBreedView from './view';
+import { Preloader } from '../../../components';
+import { adminCatalogLoadData } from '../../../actions';
 
 const initialState = {
   searchValue: '',
@@ -12,13 +15,21 @@ class AddBreed extends Component {
   static defaultProps = {
     dataAll: {},
     dataList: [],
+    fetched: false,
+    error: undefined,
   };
   static propTypes = {
     dataAll: PropTypes.objectOf(PropTypes.any),
     dataList: PropTypes.arrayOf(PropTypes.any),
     addToList: PropTypes.func.isRequired,
+    fetched: PropTypes.bool,
+    error: PropTypes.instanceOf(Error),
+    adminCatalogLoadData: PropTypes.func.isRequired,
   };
   state = initialState;
+  componentDidMount() {
+    this.props.adminCatalogLoadData();
+  }
   updateSearchValue = (e) => {
     const keywords = e.target.value;
     // Si hemos escrito algo en el input del formulario
@@ -44,6 +55,12 @@ class AddBreed extends Component {
     }
   };
   render() {
+    if (!this.props.fetched) {
+      return <Preloader />;
+    }
+    if (this.props.error) {
+      return <div>{this.props.error}</div>;
+    }
     return (
       <AddBreedView
         searchValue={this.state.searchValue}
@@ -55,4 +72,14 @@ class AddBreed extends Component {
   }
 }
 
-export default AddBreed;
+const mapStateToProps = state => ({
+  dataAll: state.adminCatalog.data,
+  fetched: state.adminCatalog.fetched,
+  error: state.adminCatalog.error,
+});
+
+const mapDispatchToProps = {
+  adminCatalogLoadData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBreed);

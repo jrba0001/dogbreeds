@@ -1,7 +1,7 @@
 import { USER_LOGIN, USER_LOGOUT } from '../../actionTypes';
 
 const initialState = {
-  isLogged: false,
+  isLogged: true,
 };
 
 const userReducer = (state = initialState, action) => {

@@ -19,7 +19,7 @@ const adminCatalogReducer = (state = initialState, action) => {
       return {
         ...state,
         fetched: true,
-        error: false,
+        error: undefined,
         data: payload,
       };
     case ADMIN_CATALOG_FETCH_ERROR:

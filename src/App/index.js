@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+import { Preloader } from '../components';
 import View from './view';
 
 const ALL_KEY = 'dataAll';
@@ -87,7 +88,7 @@ class App extends Component {
         isLogged={this.props.isLogged}
       />
     ) : (
-      <div>Cargando...</div>
+      <Preloader />
     );
   }
 }
