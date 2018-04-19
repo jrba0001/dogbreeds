@@ -26,6 +26,7 @@
     "styled-map": "^2.0.1"
   },
   "devDependencies": {
+    "@storybook/addon-knobs": "^3.4.2",
     "@storybook/react": "^3.4.2",
     "eslint-config-airbnb": "^16.1.0",
     "prettier": "^1.12.0"

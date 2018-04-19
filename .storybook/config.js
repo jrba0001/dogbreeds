@@ -1,5 +1,7 @@
 import { configure } from '@storybook/react';
 
+import './decorators';
+
 const req = require.context('../src/components', true, /\.stories\.js$/);
 
 function loadStories() {
