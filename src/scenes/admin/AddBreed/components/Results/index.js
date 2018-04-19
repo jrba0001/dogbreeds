@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { darken, timingFunctions } from 'polished';
 
@@ -16,14 +16,35 @@ const StyledResult = styled.button`
 `;
 
 const StyledHighlight = styled.span`
-  background: ${props => (props.selected ? 'yellow' : 'transparent')};
+  background: yellow;
+  color: #000;
 `;
+
+const getHightlighted = (value, searchValue) => {
+  const position = value.indexOf(searchValue);
+  return (
+    <Fragment>
+      {value.slice(0, position)}
+      <StyledHighlight key={value}>
+        {value.slice(position, position + searchValue.length)}
+      </StyledHighlight>
+      {value.slice(position + searchValue.length)}
+    </Fragment>
+  );
+  // return [
+  //   value.slice(0, position),
+  //   <StyledHighlight key={value}>
+  //     {value.slice(position, position + searchValue.length)}
+  //   </StyledHighlight>,
+  //   value.slice(position + searchValue.length),
+  // ];
+};
 
 const Results = ({ results, searchValue, addToList }) => (
   <div>
     {results.map(value => (
       <StyledResult onClick={addToList} key={value} value={value}>
-        {value}
+        {getHightlighted(value, searchValue)}
       </StyledResult>
     ))}
   </div>
