@@ -28,7 +28,7 @@ class AddBreed extends Component {
   };
   state = initialState;
   componentDidMount() {
-    if (!this.props.dataAll) {
+    if (!Object.keys(this.props.dataAll).length) {
       this.props.adminCatalogLoadData();
     }
   }
