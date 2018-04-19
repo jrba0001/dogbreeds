@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,7 +11,7 @@ const StyledWrapper = styled.div`
 const AdminRedirect = () => <Redirect to="/admin/addbreed" />;
 
 const Content = ({
-  isLogged, doLogin, doLogout, dataAll, dataList, addToList, handleDelete,
+  dataAll, dataList, addToList, handleDelete,
 }) => (
   <StyledWrapper>
     <Route exact path="/admin" component={AdminRedirect} />
@@ -24,10 +23,7 @@ const Content = ({
       path="/admin/breedlist"
       component={() => <BreedListAdmin data={dataList} handleDelete={handleDelete} />}
     />
-    <Route
-      path="/admin/logout"
-      component={() => <Logout doLogout={doLogout} isLogged={isLogged} />}
-    />
+    <Route path="/admin/logout" component={Logout} />
     <Route exact path="/" component={() => <BreedList data={dataList} />} />
     <Route exact path="/login" component={Login} />
   </StyledWrapper>
@@ -35,14 +31,10 @@ const Content = ({
 
 Content.defaultProps = {
   ...AddBreed.defaultProps,
-  isLogged: false,
 };
 
 Content.propTypes = {
   ...AddBreed.propTypes,
-  isLogged: PropTypes.bool,
-  doLogin: PropTypes.func.isRequired,
-  doLogout: PropTypes.func.isRequired,
 };
 
 export default Content;

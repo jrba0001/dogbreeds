@@ -11,6 +11,9 @@ const StyledHeader = styled.header`
   color: ${props => props.color};
   background: ${props => props.theme.colors.primary};
   padding: ${props => `${props.theme.space.sm} ${props.theme.space.md}`};
+  @media print {
+    display: none;
+  }
 `;
 
 const StyledTitle = styled.h1`

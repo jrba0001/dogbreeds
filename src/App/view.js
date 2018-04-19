@@ -4,6 +4,7 @@ import { ThemeProvider, injectGlobal } from 'styled-components';
 import { normalize } from 'polished';
 
 import { Header, Content, Menu } from './components';
+
 import theme from '../theme';
 
 injectGlobal`
